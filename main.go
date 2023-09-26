@@ -34,7 +34,7 @@ func main() {
 	// Get provider configuration
 	provider, err := auth.GetOIDCProvider(providerEndpoint)
 	if err != nil {
-		log.Fatalf("Failed to retrieve provider configuration: %v\n", err)
+		log.Fatalf("OIDC Auth: Failed to retrieve provider configuration: %v\n", err)
 	}
 
 	// get token endpint from the provider
@@ -43,7 +43,7 @@ func main() {
 	// Retrieve an OIDC token using the password grant type
 	accessToken, err := auth.RequestJWT(username, password, otp, tokenUrl, c.ClientID, c.ClientSecret, c.ClientScope)
 	if err != nil {
-		log.Fatalf("Failed to retrieve token: %v\n", err)
+		log.Fatalf("OIDC Auth: '%s' Failed to retrieve token: %v\n", username, err)
 		os.Exit(2)
 	}
 
@@ -53,5 +53,5 @@ func main() {
 		log.Fatal(err)
 		os.Exit(3)
 	}
-	log.Println("Token acquired and verified Successfully.")
+	log.Printf("OIDC Auth: '%s' Token acquired and verified Successfully.\n", username)
 }

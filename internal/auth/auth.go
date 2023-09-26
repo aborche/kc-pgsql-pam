@@ -36,14 +36,14 @@ func VerifyToken(aToken, cID, cSecret, providerRealm, providerUrl string) error 
 	// Parse the access token
 	token, _, err := parser.ParseUnverified(aToken, jwt.MapClaims{})
 	if err != nil {
-		return fmt.Errorf("Error parsing access token:", err)
+		return fmt.Errorf("error parsing access token: %v", err)
 
 	}
 
 	// Get the token's claims
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok {
-		return fmt.Errorf("Error getting token claims")
+		return fmt.Errorf("error getting token claims")
 	}
 
 	// Get the token's expiration time
@@ -51,13 +51,13 @@ func VerifyToken(aToken, cID, cSecret, providerRealm, providerUrl string) error 
 
 	// Check if the token is expired
 	if time.Now().After(expirationTime) {
-		return fmt.Errorf("Access token has expired")
+		return fmt.Errorf("access token has expired")
 	}
 
 	// Verify the access token with Keycloak
 	_, err = client.RetrospectToken(context.Background(), aToken, cID, cSecret, providerRealm)
 	if err != nil {
-		return fmt.Errorf("Access token verification failed:", err)
+		return fmt.Errorf("access token verification failed: %s", err)
 	}
 
 	return nil
@@ -76,7 +76,7 @@ func RequestJWT(username, password, otp, tokenUrl, clientid, clientsecret, clien
 	urlV.Add("password", password)
 
 	if len(clientscope) > 0 {
-		urlV.Add("scop", clientscope)
+		urlV.Add("scope", clientscope)
 	}
 
 	if len(otp) > 0 {

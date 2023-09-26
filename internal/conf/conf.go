@@ -21,7 +21,7 @@ var (
 	configPaths = []string{
 		".",
 		"/opt/kc-pgsql-pam",
-		"/etc/",
+		"/etc/kc-pgsql-pam",
 		"$HOME/.config/",
 	}
 )
@@ -37,12 +37,12 @@ func LoadConfig() (config Config, err error) {
 	viper.SetConfigName(configName)
 	viper.SetConfigType("toml")
 
-	viper.SetEnvPrefix("kc_pgsql")  // Becomes "KC_PGSQL"
-	viper.BindEnv("Realm")        // KC_PGSQL_REALM
-	viper.BindEnv("Endpoint")     // KC_PGSQL_ENDPOINT
-	viper.BindEnv("ClientID")     // KC_PGSQL_CLIENTID
-	viper.BindEnv("ClientSecret") // KC_PGSQL_CLIENTSECRET
-	viper.BindEnv("ClientScope")  // KC_PGSQL_CLIENTSCOPE
+	viper.SetEnvPrefix("kc_pgsql") // Becomes "KC_PGSQL"
+	viper.BindEnv("Realm")         // KC_PGSQL_REALM
+	viper.BindEnv("Endpoint")      // KC_PGSQL_ENDPOINT
+	viper.BindEnv("ClientID")      // KC_PGSQL_CLIENTID
+	viper.BindEnv("ClientSecret")  // KC_PGSQL_CLIENTSECRET
+	viper.BindEnv("ClientScope")   // KC_PGSQL_CLIENTSCOPE
 
 	err = viper.ReadInConfig()
 	if err != nil {

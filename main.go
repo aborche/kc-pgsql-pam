@@ -4,9 +4,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/kha7iq/kc-ssh-pam/internal/auth"
-	"github.com/kha7iq/kc-ssh-pam/internal/conf"
-	"github.com/kha7iq/kc-ssh-pam/internal/flags"
+	"github.com/aborche/kc-pgsql-pam/internal/auth"
+	"github.com/aborche/kc-pgsql-pam/internal/conf"
+	"github.com/aborche/kc-pgsql-pam/internal/flags"
 )
 
 var (

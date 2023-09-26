@@ -1,4 +1,4 @@
-module github.com/kha7iq/kc-ssh-pam
+module github.com/aborche/kc-pgsql-pam
 
 go 1.20
 

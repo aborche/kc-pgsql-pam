@@ -243,7 +243,6 @@ Type "help" for help.
 postgres=> \conninfo
 You are connected to database "postgres" as user "user@domain.com" on host "xxx.xxx.xxx.xxx" at port "5432".
 SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
-
 ```
 
 Check postgresql and kc-pgsql-pam logs for errros
@@ -255,7 +254,6 @@ $ tail /var/log/kc-pgsql-pam.log
 
 *** Thu Sep 28 11:44:59 2023
 2023/09/28 11:44:59 OIDC Auth: 'user@domain.com' Token acquired and verified Successfully.
-
 ```
 
 :diamond_shape_with_a_dot_inside: Detailed article with screenshots is also [available here](https://lmno.pk/post/kc-sso-pam/)

@@ -1,19 +1,6 @@
-<h2 align="center">
-  <p align="center"><img width=30% src="https://raw.githubusercontent.com/aborche/kc-pgsql-pam/master/.github/img/logo.png"></p>
-</h2>
-<p align="center">
-  <img alt="GitHub Build Status" src="https://img.shields.io/github/actions/workflow/status/aborche/kc-pgsql-pam/build.yml?label=Build">
-   <a href="https://github.com/aborche/kc-pgsql-pam/releases">
-   <img alt="Release" src="https://img.shields.io/github/v/release/aborche/kc-pgsql-pam?label=Release">
-   <a href="https://goreportcard.com/report/github.com/aborche/kc-pgsql-pam">
-   <img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/aborche/kc-pgsql-pam">
-   <a href="#">
-   <img alt="GitHub go.mod Go version" src="https://img.shields.io/github/go-mod/go-version/aborche/kc-pgsql-pam">
-   <a href="https://github.com/aborche/kc-pgsql-pam/issues">
-   <img alt="GitHub issues" src="https://img.shields.io/github/issues/aborche/kc-pgsql-pam?style=flat-square&logo=github&logoColor=white">
-   <a href="https://github.com/aborche/kc-pgsql-pam/blob/master/LICENSE.md">
-   <img alt="License" src="https://img.shields.io/github/license/aborche/kc-pgsql-pam">
-</p>
+
+
+# Keycloak PGSQL PAM
 
 <p align="center">
   <a href="#install">Install</a> •
@@ -21,8 +8,6 @@
   <a href="#configuration">Configuration</a> •
   <a href="#contributing">Contributing</a> •
 </p>
-
-# Keycloak PGSQL PAM
 
 **kc-pgsql-pam** designed to streamline the process of user authentication and enable users to access PGSQL through OIDC. The program integrates with Keycloak to obtain a password grant token based on the user's login credentials, including their username and password. If two-factor authentication is enabled for the user, the program supports OTP code as well.
 

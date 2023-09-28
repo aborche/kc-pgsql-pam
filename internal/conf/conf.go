@@ -4,11 +4,14 @@ import "github.com/spf13/viper"
 
 // Config struct will store the configuration values provided by user
 type Config struct {
-	Realm        string
-	Endpoint     string
-	ClientID     string
-	ClientSecret string
-	ClientScope  string
+	Realm          string
+	Endpoint       string
+	ClientID       string
+	ClientSecret   string
+	ClientScope    string
+	GroupsClaim    string
+	AllowedGroups  []string
+	AllowedDomains []string
 }
 
 var (
@@ -37,12 +40,15 @@ func LoadConfig() (config Config, err error) {
 	viper.SetConfigName(configName)
 	viper.SetConfigType("toml")
 
-	viper.SetEnvPrefix("kc_pgsql") // Becomes "KC_PGSQL"
-	viper.BindEnv("Realm")         // KC_PGSQL_REALM
-	viper.BindEnv("Endpoint")      // KC_PGSQL_ENDPOINT
-	viper.BindEnv("ClientID")      // KC_PGSQL_CLIENTID
-	viper.BindEnv("ClientSecret")  // KC_PGSQL_CLIENTSECRET
-	viper.BindEnv("ClientScope")   // KC_PGSQL_CLIENTSCOPE
+	viper.SetEnvPrefix("kc_pgsql")  // Becomes "KC_PGSQL"
+	viper.BindEnv("Realm")          // KC_PGSQL_REALM
+	viper.BindEnv("Endpoint")       // KC_PGSQL_ENDPOINT
+	viper.BindEnv("ClientID")       // KC_PGSQL_CLIENTID
+	viper.BindEnv("ClientSecret")   // KC_PGSQL_CLIENTSECRET
+	viper.BindEnv("ClientScope")    // KC_PGSQL_CLIENTSCOPE
+	viper.BindEnv("GroupsClaim")    // KC_PGSQL_GROUPSCLAIM
+	viper.BindEnv("AllowedGroups")  // KC_PGSQL_ALLOWEDGROUPS
+	viper.BindEnv("AllowedDomains") // KC_PGSQL_ALLOWEDDOMAINS
 
 	err = viper.ReadInConfig()
 	if err != nil {

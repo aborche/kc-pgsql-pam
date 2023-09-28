@@ -9,6 +9,7 @@ possible.
   - `internal/auth` - Helper functions related to authentication.
   - `internal/conf` - Functions related to configuration file.
   - `internal/flags` - Commandline flags.
+  - `internal/utils` - Some support functions.
 
 
 ## Commits

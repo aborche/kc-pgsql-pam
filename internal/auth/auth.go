@@ -12,7 +12,8 @@ import (
 	"time"
 
 	"github.com/Nerzal/gocloak/v13"
-	"github.com/coreos/go-oidc"
+	"github.com/aborche/kc-pgsql-pam/internal/utils"
+	"github.com/coreos/go-oidc/v3/oidc"
 	"github.com/golang-jwt/jwt"
 )
 
@@ -25,7 +26,7 @@ type Token struct {
 	Expiry       time.Time `json:"expiry,omitempty"`
 }
 
-func VerifyToken(aToken, cID, cSecret, providerRealm, providerUrl string) error {
+func VerifyToken(aToken, cID, cSecret, providerRealm, providerUrl string, GroupsClaim string, AllowedGroups []string) error {
 
 	// Set up the Keycloak client
 	client := gocloak.NewClient(providerUrl)
@@ -60,6 +61,18 @@ func VerifyToken(aToken, cID, cSecret, providerRealm, providerUrl string) error 
 		return fmt.Errorf("access token verification failed: %s", err)
 	}
 
+	// Check groups claim in token
+	if len(AllowedGroups) > 0 {
+		groupsarray, ok := claims[GroupsClaim]
+		if ok {
+			intersected := utils.InterSectInterface(groupsarray.([]interface{}), AllowedGroups)
+			if len(intersected) < 1 {
+				return fmt.Errorf("token claims error: no allowed groups found in token")
+			}
+		} else {
+			return fmt.Errorf("token claims error: claim '%s' not found in token", GroupsClaim)
+		}
+	}
 	return nil
 }
 

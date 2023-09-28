@@ -3,10 +3,12 @@ package main
 import (
 	"log"
 	"os"
+	"strings"
 
 	"github.com/aborche/kc-pgsql-pam/internal/auth"
 	"github.com/aborche/kc-pgsql-pam/internal/conf"
 	"github.com/aborche/kc-pgsql-pam/internal/flags"
+	"github.com/aborche/kc-pgsql-pam/internal/utils"
 )
 
 var (
@@ -25,6 +27,20 @@ func main() {
 
 	providerEndpoint := c.Endpoint + "/realms/" + c.Realm
 	username := os.Getenv("PAM_USER")
+
+	// Check user domain
+	if len(c.AllowedDomains) > 0 {
+		index := strings.Index(username, "@")
+		if index < 1 {
+			log.Fatalf("OIDC Auth: entered username '%s' not contains domain part", username)
+			os.Exit(4)
+		}
+		domain := username[strings.LastIndex(username, "@")+1:]
+		if !utils.CheckStringInArray(c.AllowedDomains, domain) {
+			log.Fatalf("OIDC Auth: domain '%s' in username '%s' is not allowed here", domain, username)
+			os.Exit(4)
+		}
+	}
 
 	// Analyze the input from stdIn and split the password if it containcts "/"  return otp and pass
 	password, otp, err := auth.ReadPasswordWithOTP()
@@ -48,7 +64,7 @@ func main() {
 	}
 
 	// Verify the token and retrieve the ID token
-	if err := auth.VerifyToken(accessToken, c.ClientID, c.ClientSecret, c.Realm, c.Endpoint); err != nil {
+	if err := auth.VerifyToken(accessToken, c.ClientID, c.ClientSecret, c.Realm, c.Endpoint, c.GroupsClaim, c.AllowedGroups); err != nil {
 		// handle the error
 		log.Fatal(err)
 		os.Exit(3)

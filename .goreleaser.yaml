@@ -13,8 +13,8 @@ builds:
     - linux
   goarch:
     - amd64
-    #- arm
-    #- arm64
+    - arm
+    - arm64
   goarm:
     - "7"
   mod_timestamp: '{{ .CommitTimestamp }}'
@@ -31,12 +31,12 @@ changelog:
     exclude: ['^docs:', '^test:', '^chore:', 'Merge pull request', 'Merge branch', 'go mod tidy']
 
 archives:
-  - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+  - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}_{{ .Version }}'
     files:
-    - config.toml
+    - config.toml.example
 
 nfpms:
-  - file_name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}_{{ .Version }}{{ end }}'
+  - file_name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}_{{ .Version }}'
     maintainer: 'Aborche <zhecka@gmail.com>'
     vendor: 'Abdul Khaliq <a.khaliq@outlook.my>'
     description: KC PGSQL PAM provides a password grant token from keycloak for Pluggable Authentication Modules (PAM) SSO.
@@ -46,6 +46,6 @@ nfpms:
     - rpm
     bindir: /opt/{{ .ProjectName }}
     contents:
-      - src: config.toml
-        dst: /opt/{{ .ProjectName }}/config.toml
+      - src: config.toml.example
+        dst: /opt/{{ .ProjectName }}/config.toml.example
 

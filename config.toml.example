@@ -1,0 +1,8 @@
+realm = "pgsql-demo"
+endpoint = "https://keycloak.example.com"
+clientid = "keycloak-client-id"
+clientsecret = "MIKEcHObWmI3V3pF1hcSqC9KEILfLN"
+clientscope = "openid"
+groupsclaim = "groups"
+allowedgroups = ["pgsql-user"]
+alloweddomains = ["example.com"]

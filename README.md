@@ -2,6 +2,8 @@
 
 # Keycloak PGSQL PAM
 
+Fork of https://github.com/kha7iq/kc-ssh-pam but for PostgreSQL
+
 <p align="center">
   <a href="#install">Install</a> •
   <a href="#usage">Usage</a> •
